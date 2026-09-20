@@ -1,0 +1,115 @@
+COMO CRIAR UM REPOSITORIO NO GITHUB E ENVIAR O PROJETO
+========================================================
+
+PRE-REQUISITO
+--------------
+Ter uma conta no GitHub (https://github.com). Se ainda nao tiver, crie uma
+gratuitamente em https://github.com/join.
+
+Git ja esta instalado nesta maquina (versao 2.51.2), entao pode pular a
+instalacao.
+
+
+PASSO 1 - Criar o repositorio no site do GitHub
+-------------------------------------------------
+1. Acesse https://github.com e faca login.
+2. No canto superior direito, clique no "+" e depois em "New repository".
+3. Preencha:
+   - Repository name: LocadoraVeiculosAPI
+   - Description (opcional): Sistema de aluguel de veiculos - TP disciplina de Banco de Dados
+   - Visibilidade: Public ou Private (tanto faz, desde que o professor consiga acessar)
+   - NAO marque "Add a README file", "Add .gitignore" nem "Choose a license"
+     (o projeto ja tem esses arquivos localmente; marcar isso so criaria conflito).
+4. Clique em "Create repository".
+5. O GitHub vai mostrar uma pagina com um endereco parecido com:
+   https://github.com/SEU_USUARIO/LocadoraVeiculosAPI.git
+   Copie esse endereco (voce vai usar no Passo 3).
+
+
+PASSO 2 - Preparar o repositorio local (Git)
+-----------------------------------------------
+Abra o terminal (PowerShell) na pasta do projeto:
+
+   cd C:\Users\Ale\desktop\csharp\LocadoraVeiculosAPI
+
+Inicialize o repositorio git local (so precisa fazer isso uma vez):
+
+   git init
+
+Configure seu nome e e-mail (se ainda nao tiver configurado globalmente):
+
+   git config user.name "Seu Nome"
+   git config user.email "seu-email@exemplo.com"
+
+Adicione todos os arquivos do projeto ao "staging" (o .gitignore ja impede
+que as pastas bin/ e obj/ sejam enviadas):
+
+   git add .
+
+Verifique o que sera commitado (confira se bin/, obj/ e arquivos sensiveis
+NAO aparecem na lista):
+
+   git status
+
+Crie o primeiro commit:
+
+   git commit -m "Etapa 1 - Modelagem do banco de dados (EF Core)"
+
+
+PASSO 3 - Conectar o repositorio local ao GitHub e enviar (push)
+--------------------------------------------------------------------
+Use o endereco copiado no Passo 1 para adicionar o repositorio remoto:
+
+   git remote add origin https://github.com/SEU_USUARIO/LocadoraVeiculosAPI.git
+
+Renomeie a branch principal para "main" (padrao atual do GitHub):
+
+   git branch -M main
+
+Envie o codigo para o GitHub:
+
+   git push -u origin main
+
+Na primeira vez, o Windows pode abrir uma janela pedindo login no GitHub
+(usuario/senha ou token). Faca o login normalmente. Se pedir senha e nao
+aceitar sua senha normal, sera necessario criar um "Personal Access Token":
+   1. No GitHub: foto de perfil > Settings > Developer settings >
+      Personal access tokens > Tokens (classic) > Generate new token.
+   2. Marque o escopo "repo".
+   3. Copie o token gerado e use ele no lugar da senha quando o Git pedir.
+
+
+PASSO 4 - Conferir se deu certo
+-----------------------------------
+Acesse no navegador:
+
+   https://github.com/SEU_USUARIO/LocadoraVeiculosAPI
+
+Confirme que os arquivos do projeto (Models/, Data/, Migrations/,
+Program.cs, README.md etc.) aparecem no repositorio.
+
+
+PASSO 5 - Atualizar o repositorio em etapas futuras
+--------------------------------------------------------
+Sempre que fizer alteracoes no projeto (ex: Etapa 2 - Backend), repita:
+
+   git add .
+   git commit -m "Etapa 2 - Implementacao do backend"
+   git push
+
+
+PASSO 6 - Gerar o .zip para entrega no Canvas
+--------------------------------------------------
+1. Va na pagina do repositorio no GitHub.
+2. Clique no botao verde "Code".
+3. Clique em "Download ZIP".
+4. Envie esse arquivo .zip na tarefa correspondente no Canvas.
+
+
+DICAS
+-------
+- Sempre rode "git status" antes de "git add ." para nao enviar arquivos
+  que nao deveriam ir para o repositorio (ex: bin/, obj/, arquivos com
+  senhas de banco de dados reais).
+- O arquivo .gitignore ja criado neste projeto ja exclui as pastas
+  bin/ e obj/ automaticamente.
